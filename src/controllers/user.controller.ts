@@ -1,8 +1,11 @@
 import {Request, Response} from "express";
-import { s_create_user } from "../services/user.service";
+import { s_create_user, s_all_user, s_get_user } from "../services/user.service";
 import { validationResult } from "express-validator";
+
+
 export const all_users = async (req:Request, res:Response)=>{
-    res.send("Hellooooooo");
+    const result = await s_all_user(req,res);
+    res.json(result);
 }
 
 export const create_user = async(req:Request, res:Response)=>{
@@ -19,4 +22,14 @@ export const create_user = async(req:Request, res:Response)=>{
         res.json(result)
     }
  
+}
+
+export const get_user = async(req:Request, res:Response)=>{
+    const user = await s_get_user(req,res);
+    res.json(user); 
+}
+
+export const search_user = async(req:Request, res:Response)=>{
+    const user = await search_user(req,res);
+    res.json(user); 
 }
