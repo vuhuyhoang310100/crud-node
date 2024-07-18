@@ -15,7 +15,7 @@ export const s_create_user = async (req:Request, res:Response) =>{
 }
 
 export const s_all_user =async(req:Request,res:Response)=>{
-    return await  user.find();
+    return await  user.find({relations:['posts']});
    
 }
 export const s_get_user =async(req:Request,res:Response)=>{

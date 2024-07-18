@@ -1,6 +1,7 @@
 import express from "express";
 import { user_route } from "./routes/user.route";
 import dataSource from './database/db'
+import { post_route } from "./routes/post.route";
 dataSource.initialize().then(result => {
     console.log('init db success');
 }).catch((err) => {
@@ -10,6 +11,8 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 app.use("/api/users",user_route)
+app.use("/api/posts",post_route)
+
 
 
 

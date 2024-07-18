@@ -1,6 +1,7 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Post } from "./post";
 
-@Entity()
+@Entity("user")
 export class User{
     @PrimaryGeneratedColumn()
     id!:number
@@ -11,4 +12,7 @@ export class User{
     phone!:string
     @Column({nullable:true})
     email!:string
+
+    @OneToMany(()=>Post,(post)=>post.user)
+    posts!:Post[]
 }
