@@ -12,7 +12,8 @@ export class User{
     phone!:string
     @Column({nullable:true})
     email!:string
-
+    @Column({nullable:false,default:'123456'})
+    password!:string
     @OneToMany(()=>Post,(post)=>post.user)
     posts!:Post[]
 }
