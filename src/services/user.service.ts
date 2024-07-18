@@ -45,3 +45,49 @@ else{
 }
    
 }
+
+export const s_search_user = async (req:Request,res:Response)=>{
+    const{name} = req.body;
+    if(name){
+        const users = await user.find({where:{
+            name:Like(`%${name}%`)
+        }
+           
+        })
+        return users;
+    }
+    else{
+        return null;
+    }
+}
+export const s_delete_user = async (req:Request,res:Response)=>{
+    const id:any = req.params.id;
+    if(id){
+        const users = await user.findOne({where:{
+            id:id
+        }
+           
+        });
+        if(users){
+            await user.remove(users);
+            return true;
+        }else{
+            return "user not found";
+        }
+    }
+}
+export const s_update_user = async (req:Request,res:Response)=>{
+    const uid:any = req.params.id;
+    const {name,phone,email}=req.body;
+    if(!uid||!name||!phone||!email){
+        return "data missing"
+
+    }
+    else{
+       const x =  await user.update(
+            {id:uid},{name:name,phone:phone,email:email}
+        );
+        return x;
+    }
+
+}
